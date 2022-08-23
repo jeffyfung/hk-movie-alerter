@@ -5,9 +5,9 @@ export async function initDatabase(connectionStr: string): Promise<void> {
   try {
     await mongoose.connect(connectionStr);
     logger.info('connected to MongoDB');
-  } catch (err: unknown) {
-    let errMsg = 'error connecting to MongoDB; ';
-    if (err instanceof Error) errMsg += err.message;
-    logger.error(errMsg);
+    throw new Error('test');
+  } catch (err: any) {
+    logger.error('error connecting to MongoDB; ', err.stack);
+    throw new Error(err);
   }
 }
