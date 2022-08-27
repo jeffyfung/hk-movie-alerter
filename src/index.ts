@@ -17,15 +17,13 @@ async function main(remainingRetry: number): Promise<void> {
     logger.info('end cron job');
   } catch (err) {
     logger.error(err);
-    console.log('here1');
     if (remainingRetry > 0) {
-      console.log('here2');
       remainingRetry -= 1;
       logger.info(`retying cron job:: tried ${maxRetry - remainingRetry} times`);
       main(remainingRetry);
     } else {
       logger.info(`cron job failed after ${maxRetry - remainingRetry} retries`);
-      // send email alert
+      // on hold - send email alert
     }
   }
 }
